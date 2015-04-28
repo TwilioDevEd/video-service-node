@@ -19,3 +19,9 @@ footer {
 footer i {
     color:red;
 }
+
+span.credits img {
+    margin-top:-4px;
+    height:16px;
+    width:16px;
+}

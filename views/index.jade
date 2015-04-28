@@ -9,7 +9,7 @@ block content
     .col-md-12
       table.table
         tr
-          th Name
+          th Model
           th Manufacturer
           th Crew
           th Passengers
@@ -17,12 +17,12 @@ block content
         each ship in results
           tr
             td
-              a(href='/products?url='+ship.url)= ship.name
+              a(href='/products?url='+ship.url)= ship.model
             td= ship.manufacturer
-            td= ship.crew
-            td= ship.passengers
+            td= num(ship.crew, 0)
+            td= num(ship.passengers, 0)
             td
               if ship.cost_in_credits == 'unknown' 
                 span Talk To Sales
               else
-                span= ship.cost_in_credits
+                +credits(ship.cost_in_credits)
