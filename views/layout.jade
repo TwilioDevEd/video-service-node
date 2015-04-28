@@ -36,8 +36,11 @@ html(lang='en')
 
   body
     mixin credits(number, digits)
-      span.credits= num(number, digits)
-        img(src='/credits.svg')
+      if number == 'unknown' 
+        span Talk To Sales
+      else
+        span.credits= num(number, digits)
+          img(src='/credits.svg')
 
     //- Include page content
     #main.container

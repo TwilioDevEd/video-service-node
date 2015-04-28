@@ -22,7 +22,4 @@ block content
             td= num(ship.crew, 0)
             td= num(ship.passengers, 0)
             td
-              if ship.cost_in_credits == 'unknown' 
-                span Talk To Sales
-              else
-                +credits(ship.cost_in_credits)
+              +credits(ship.cost_in_credits)
