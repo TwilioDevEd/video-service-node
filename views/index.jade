@@ -1,4 +1,28 @@
 extends layout
 
 block content
-  h1 Hello World
+  h1 Watto's Budget Starship Emporium
+  p.
+    Step right up and browse the finest selection of gently used starships in
+    the Outer Rim Territories, fit for every budget!
+  .row
+    .col-md-12
+      table.table
+        tr
+          th Name
+          th Manufacturer
+          th Crew
+          th Passengers
+          th Price (Credits)
+        each ship in results
+          tr
+            td
+              a(href='/products?url='+ship.url)= ship.name
+            td= ship.manufacturer
+            td= ship.crew
+            td= ship.passengers
+            td
+              if ship.cost_in_credits == 'unknown' 
+                span Talk To Sales
+              else
+                span= ship.cost_in_credits
