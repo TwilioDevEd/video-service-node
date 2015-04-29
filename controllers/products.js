@@ -1,4 +1,6 @@
 var get = require('request');
+
+// List endpoint for the starwars ship API
 var swapi = 'http://swapi.co/api/starships';
 
 // List all products
@@ -21,7 +23,13 @@ exports.detail = function(request, response) {
             return response.status(500).send(err);
         }
 
-        var data = JSON.parse(body);
+        // Create template render context with the API response
+        var data = {
+            ship: JSON.parse(body)
+        };
+        data.title = data.ship.model;
+
+        // Render jade template with product data
         response.render('detail', data);
     });
 };

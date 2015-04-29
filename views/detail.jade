@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  h1= model
+  h1= title
   .row
     .col-md-6
       p
@@ -9,28 +9,32 @@ block content
       table.table
         tr
           th Starship Class
-          td= starship_class
+          td= ship.starship_class
         tr
           th Manufacturer
-          td= manufacturer
+          td= ship.manufacturer
         tr
           th Cost (Credits)
           td 
-            +credits(cost_in_credits)
+            +credits(ship.cost_in_credits)
         tr
           th Length
-          td= num(length) + ' meters'
+          td= num(ship.length) + ' meters'
         tr
           th Max Speed (Megalight)
-          td= num(MGLT,0)+' '
+          td= num(ship.MGLT,0)+' '
             a(href='http://starwars.wikia.com/wiki/Megalight', 
               target='_blank') MGLT
         tr
           th Crew
-          td= num(crew, 0)
+          td= num(ship.crew, 0)
         tr
           th Passengers
-          td= num(passengers, 0)
-    .col-md-6
-      p video chat widget will go here!
+          td= num(ship.passengers, 0)
+    .col-md-6.video
+      button.btn.btn-primary Need Help? Chat with Support Now!
+      include _video
+
+block scripts
+  script(src='/js/product.js')
   

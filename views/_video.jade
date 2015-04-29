@@ -1,0 +1,12 @@
+.video-widget
+  video.main
+  video.me
+
+
+//- Render template variables into script tags, so we can access from our
+//- JavaScript code
+script!= 'window.endpointId = "' + endpointId + '";'
+script!= 'window.token = "' + token + '";'
+//- Include shared code to run video widget
+script(src='/js/video.js')
+  

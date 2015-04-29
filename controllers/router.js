@@ -1,5 +1,7 @@
-var products = require('./products');
 var s = require('underscore.string');
+var products = require('./products');
+var supportTickets = require('./support_tickets');
+var token = require('../middleware/token');
 
 // Map routes to controller functions
 module.exports = function(app) {
@@ -13,6 +15,9 @@ module.exports = function(app) {
     // Render home page (product list)
     app.get('/', products.list);
 
-    // Product detail page
-    app.get('/products', products.detail);
+    // Product detail page, which should include a capability token
+    app.get('/products', token, products.detail);
+
+    // Create a support ticket
+    app.post('/tickets', supportTickets.create);
 };
