@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  h1 Current Support Tickets
+  .row
+    .col-md-12
+      table.table
+        tr
+          th Product
+          th Time In Queue
+          th Handle Ticket
+        each ticket in tickets
+          tr
+            td= ticket.productUrl
+            td= timeAgo(ticket.createdAt)
+            td
+              a.btn.btn-primary(href='/tickets/' + ticket._id) Help Customer

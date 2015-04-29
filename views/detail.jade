@@ -6,31 +6,7 @@ block content
     .col-md-6
       p
         a(href='/') &lt;&lt; View All Ships
-      table.table
-        tr
-          th Starship Class
-          td= ship.starship_class
-        tr
-          th Manufacturer
-          td= ship.manufacturer
-        tr
-          th Cost (Credits)
-          td 
-            +credits(ship.cost_in_credits)
-        tr
-          th Length
-          td= num(ship.length) + ' meters'
-        tr
-          th Max Speed (Megalight)
-          td= num(ship.MGLT,0)+' '
-            a(href='http://starwars.wikia.com/wiki/Megalight', 
-              target='_blank') MGLT
-        tr
-          th Crew
-          td= num(ship.crew, 0)
-        tr
-          th Passengers
-          td= num(ship.passengers, 0)
+      include _ship_detail
     .col-md-6.video
       button.btn.btn-primary Need Help? Chat with Support Now!
       include _video

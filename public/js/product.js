@@ -31,4 +31,10 @@ $(function() {
             alert('Oops! There was a problem. Please try again.');
         });
     });
+
+    // hide button and show video when an invitation has been accepted
+    $(document).on('inviteAccepted', function() {
+        $('.btn').hide();
+        $('.video-widget').show();
+    });
 });

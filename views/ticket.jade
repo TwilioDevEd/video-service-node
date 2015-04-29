@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1= ship.model
+  p= 'This customer has been waiting for ' + timeAgo(ticket.createdAt) + '.'
+  .row
+    .col-md-6
+      p
+        a(href='/tickets') &lt;&lt; Back to all tickets
+      include _ship_detail
+    .col-md-6
+      include _video
+
+block scripts
+  //- Expose the current ticket's endpoint so we can call them
+  script!= 'window.ticketEndpoint = "' + ticket.endpoint + '";'
+  script(src='/js/ticket.js')
+  
