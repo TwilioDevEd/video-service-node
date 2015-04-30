@@ -1,14 +1,18 @@
 .video-widget
   video.main
   video.me
+  .controls.btn-group.btn-group-xs
+    button#mute.btn.btn-default Mute
+    button#hangup.btn.btn-danger End Call
 
 //- Add Twilio video SDK from CDN
-script(src='//media.twiliocdn.com/sdk/conversations/v0.5/js/releases/0.5.0.b1-ecab1be/twilio-conversations.js')
+script(src='//media.twiliocdn.com/sdk/conversations/v0.6/js/releases/0.6.1.b1-d981c28/twilio-conversations.js')
 
 //- Render template variables into script tags, so we can access from our
 //- JavaScript code
 script!= 'window.endpointId = "' + endpointId + '";'
 script!= 'window.token = "' + token + '";'
+script!= 'window.iceServers = \'' + JSON.stringify(iceServers) + '\';'
 
 //- Include shared code to run video widget
 script(src='/js/video.js')

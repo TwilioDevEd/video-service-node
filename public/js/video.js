@@ -10,7 +10,7 @@ function showVideoStreams(conversation) {
     supportConversation = conversation;
     conversation.localStream.attach(localVideoElement);
 
-    conversation.on('participantJoined', function(participant) {
+    conversation.on('participantConnected', function(participant) {
         // show participant video
         var remoteVideoElement = $('.main').get(0);
         participant.stream.attach(remoteVideoElement);
@@ -19,9 +19,14 @@ function showVideoStreams(conversation) {
 
 // Initialize twilio video components
 $(function() {
+    var ice = JSON.parse(iceServers);
+
     // Create endpoint for current person, using the capability token
     // already created in the window scope
-    new Twilio.Endpoint.createWithToken(token).then(function(endpoint) {
+    new Twilio.Endpoint.createWithToken(token, {
+        debug: true,
+        iceServers: ice
+    }).then(function(endpoint) {
         // automatically answer any incoming calls
         endpoint.on('invite', function(invite) {
             invite.accept().then(function(conversation) {
@@ -35,5 +40,19 @@ $(function() {
 
     }, function(error) {
         alert('Sorry, there was a problem connecting to Twilio :(');
+    });
+
+    // Video controls
+    var muted = false;
+    var $mute = $('#mute');
+    $mute.on('click', function() {
+        supportConversation.localStream.muted = !muted;
+        muted = !muted;
+        $mute.html((muted) ? 'Unmute' : 'Mute');
+    });
+
+    $('#hangup').on('click', function() {
+        supportConversation.leave();
+        $(document).trigger('conversationLeft');
     });
 });

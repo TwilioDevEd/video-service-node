@@ -32,10 +32,17 @@ span.credits img {
 
 .video-widget {
     position:relative;
-    /*display:none;*/
+    display:none;
+}
+
+.controls {
+    position:absolute;
+    bottom:10px;
+    left:10px;
 }
 
 video.main {
+    background-color:#000;
     width:100%;
     height:100%;
 }
@@ -44,6 +51,6 @@ video.me {
     position:absolute;
     bottom:10px;
     right:10px;
-    width:100px;
-    height:100px;
+    width:150px;
+    height:150px;
 }

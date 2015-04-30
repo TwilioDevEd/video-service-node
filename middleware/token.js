@@ -1,12 +1,11 @@
 var twilio = require('twilio');
 var uuid = require('uuid');
 var config = require('../config');
+var client = twilio(config.accountSid, config.authToken);
 
 // Middleware function to add capability token and endpoint data to the 
 // rendering context for a response
 module.exports = function(request, response, next) {
-    var data = {};
-
     // Generate a capability token for the client
     var capability = new twilio.Capability(config.accountSid, config.authToken);
 
@@ -20,8 +19,12 @@ module.exports = function(request, response, next) {
     var endpoint = uuid.v1();
     capability.allowClientIncoming(endpoint);
 
-    // Add the capability token and endpoint ID to the rendering context
-    response.locals.endpointId = endpoint;
-    response.locals.token = capability.generate();
-    next();
+    // Create a NAT traversal token
+    client.tokens.create(function(err, resp) {
+        // Add the capability token and endpoint ID to the rendering context
+        response.locals.endpointId = endpoint;
+        response.locals.iceServers = resp.iceServers;
+        response.locals.token = capability.generate();
+        next();
+    });
 };

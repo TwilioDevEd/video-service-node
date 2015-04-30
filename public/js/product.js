@@ -9,11 +9,11 @@ function getParameterByName(name) {
 $(function() {
     var initial = 'Need Help? Chat with Support Now!';
     var waiting = 'Waiting for the next available agent...';
+    var $help = $('#help');
 
-    $('.btn').on('click', function(e) {
+    $help.on('click', function(e) {
         e.preventDefault();
-        $btn = $(this);
-        $btn.html(waiting);
+        $help.html(waiting);
 
         // Create support request
         $.ajax({
@@ -27,14 +27,20 @@ $(function() {
         }).done(function(data) {
             alert(data.message);
         }).fail(function() {
-            $btn.html(initial);
+            $help.html(initial);
             alert('Oops! There was a problem. Please try again.');
         });
     });
 
     // hide button and show video when an invitation has been accepted
     $(document).on('inviteAccepted', function() {
-        $('.btn').hide();
+        $help.hide();
         $('.video-widget').show();
+    });
+
+    $(document).on('conversationLeft', function() {
+        $('.video-widget').hide();
+        $help.html(initial);
+        $help.show();
     });
 });
