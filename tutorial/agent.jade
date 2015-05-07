@@ -1,0 +1,67 @@
+.step(data-title='Answering a Support Request', 
+  data-file='controllers/router.js')
+  :markdown
+    ## Answering a Support Request
+
+    Now that we've seen how a customer can request video support, let's take a look at how we answer that request and initiate a video call.  Here's how the interaction works at a high level (click to make it bigger):
+
+    ![//s3.amazonaws.com/howtodocs/video-service-agent-flow.png](//s3.amazonaws.com/howtodocs/video-service-agent-flow.png)
+
+    Our agent will view a page for a support ticket, and the JavaScript running on that page will immediately try and connect to the customer with a video call.  The agent will also be able to view the same product details as the customer, so they can provide informed support based on where the customer is inside the application
+
+    Let's take a look at the code necessary to drive each step of this experience.
+
+.step(data-title='Agent UI Routes', 
+  data-file='controllers/router.js', data-highlight='26-30')
+  :markdown
+    ## Agent UI Routes
+
+    To power our agent experience, we need to handle two routes - one for the list of support requests, and another to display an individual support request. Much like the product list, we won't delive too deeply into how the list of tickets is displayed. We're reading the tickets out of a database and displaying them in an HTML table.
+
+    Let's begin instead by looking at how we render a ticket page, the second of these two routes. We use the same `token` middleware as before to create an ID for our agent. We also fetch data from the Star Wars API to get information on the ship the current customer is viewing.
+
+    Most of the action for the call is happening on the client side, though, so let's dive into the browser code to see what's going on!
+
+.step(data-title='Initializing the Twilio JavaScript SDK', 
+  data-file='public/js/video.js')
+  :markdown
+    ## Initializing the Twilio JavaScript SDK
+
+    UNDER CONSTRUCTION
+
+.step(data-title='Making an Outbound Call', 
+  data-file='public/js/ticket.js')
+  :markdown
+    ## Making an Outbound Call
+
+    UNDER CONSTRUCTION
+
+.step(data-title='Accepting an Inbound Call', 
+  data-file='public/js/video.js')
+  :markdown
+    ## Accepting an Inbound Call
+
+    UNDER CONSTRUCTION
+
+.step(data-title='Displaying Video Streams', 
+  data-file='public/js/video.js')
+  :markdown
+    ## Displaying Video Streams
+
+    UNDER CONSTRUCTION
+
+.step(data-title='Controlling Your Local Stream', 
+  data-file='public/js/video.js')
+  :markdown
+    ## Controlling Your Local Stream
+
+    UNDER CONSTRUCTION
+
+.step(data-title='All Done!', 
+  data-file='public/js/video.js')
+  :markdown
+    ## All Done!
+
+    And with a fraction of the code and none of the infrastructure you would need to roll your own WebRTC-powered video call, we've integrated live, in-context video support into our application. And this is just the beginning - you could combine this API with [TaskRouter](https://www.twilio.com/taskrouter) for more advanced work distribution for your agents, and begin to leverage other WebRTC features not used here.
+
+    We'd love to hear what you thought of this tutorial. Hit us up [on Twitter @twilio](https://twitter.com/twilio) or [send us a note](mailto:help@twilio.com). Thanks for reading!

@@ -1,0 +1,43 @@
+.step(data-title='Customer Service with Twilio Video')
+  :markdown
+    ## Customer Service with Twilio Video
+
+    In this tutorial, we'll dive into the code necessary to implement in-context customer support with Twilio Video. In this demo application, a customer will request live video support while viewing a product page on our website. In a separate "support agent" UI, we will display all current requests for support, and allow our agents to reach out directly and assist our customers.
+
+    ### Demo Screencast
+
+    Check out the video below to see this use case in action.
+
+    TODO
+
+  p.
+    Look like fun? Let's figure out how it works! Click the <i class="fa fa-fw fa-play"></i> button above to move on to the next step of the tutorial.
+
+.step(data-title='Building Blocks')
+  :markdown
+    ## API Building Blocks
+
+    To create this customer service application, we'll be using the following Twilio APIs:
+
+    * [Twilio JavaScript SDK]('#'): This SDK makes managing real-time video conversations via WebRTC very simple.
+    * [Capability Tokens]('https://www.twilio.com/docs/client/capability-tokens'): To enable our browser-based users to make use of our Twilio account, we need to issue them a signed capability token indicating what each user can do.
+
+    Let's take a look at the ingredients in this sample application next.
+
+.step(data-title='About This Application', data-file='package.json', 
+  data-highlight='27-41')
+  :markdown
+    ## About This Application
+
+    This web application was built with [Node.js](http://nodejs.org) and the popular [Express](http://expressjs.com) web framework, along with a few other useful open source components. We're going to save our support requests in [MongoDB](http://www.mongodb.com/) with the help of [Mongoose](http://mongoosejs.com/), a handy module for creating [model](http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) objects that are saved in MongoDB.
+
+    Of course, we'll also be using Twilio's module for Node.js, as well as Twilio's JavaScript SDK in the browser.
+
+    ### Run It Now
+
+    Want to run it yourself right now? Deploy this app to your Heroku account using the button below:
+
+    [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/TwilioDevEd/video-service-node)
+
+    Now that we have a better sense of what's in the box, let's move on to building the customer-facing portion of this application. 
+

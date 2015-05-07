@@ -1,0 +1,6 @@
+{
+    "title": "Customer Service with Twilio Video",
+    "repo": "TwilioDevEd/video-service-node",
+    "description": "In this tutorial, we'll show you the code necessary to create amazing in-context customer support experiences using Twilio Video. Let's get started!",
+    "heroku": true
+}

@@ -1,0 +1,86 @@
+.step(data-title='Requesting Live Video Support', 
+  data-file='controllers/router.js')
+  :markdown
+    ## Requesting Live Video Support
+
+    Let's begin our exploration of live video support by looking at the customer-facing side of this application.  Here's how that interaction works at a high level (click to make it bigger):
+
+    ![//s3.amazonaws.com/howtodocs/video-service-customer-flow.png](//s3.amazonaws.com/howtodocs/video-service-customer-flow.png)
+
+    At a high level, our user must:
+
+    1. Visit a product page
+    2. Click a button to request live support
+    3. Wait for the next available agent
+
+    Let's take a look at the code necessary to drive each step of this experience.
+
+.step(data-title='Choosing a Product', 
+  data-file='controllers/router.js', data-highlight='20-21')
+  :markdown
+    ## Choosing a Product
+
+    Our example product catalog is a list of starships fetched via the [Star Wars API](http://swapi.co/api/starships/).
+
+    We won't dive into this code in any great detail, but we'll use this API both to display a list of starships to the User, and to show them details about an individual ship. You might have one of these master-detail UIs in your existing application.
+
+    The Express route highlighted here will display a table of links that the User can choose from to show a detail page, where they will be able to request support. When you're making a big purchase like an Incom T-65 X-Wing Starfighter, that's definitely a time when you'd value high-touch support.
+
+    ![//s3.amazonaws.com/howtodocs/xwing-blueprint.jpg](//s3.amazonaws.com/howtodocs/xwing-blueprint.jpg)
+
+.step(data-title='Rendering a Product Page: The Route', 
+  data-file='controllers/router.js', data-highlight='23-24')
+  :markdown
+    ## Rendering a Product Page: The Route
+
+    This route will handle requests for all the individual product pages. There's a controller function `products.detail` which handles actually fetching product details from the Star Wars API, and including them on the rendered page.
+
+    However, we're more interested in the `token` [middleware function](http://expressjs.com/guide/using-middleware.html), which will generate a "capability token" that enables any viewer of the page to receive an incoming video call. Let's dive into that code now.
+
+.step(data-title='Rendering a Product Page: Token Middleware', 
+  data-file='middleware/token.js')
+  :markdown
+    ## Rendering a Product Page: The Token Middleware
+
+    This middleware function will be executed before every product page is rendered. It will use Twilio's helper library for Node.js to generate a one-time use token that allows a connected browser to receive incoming calls. It also generates a unique ID for this client using the `uuid` module - we'll use this as the "phone number" for our customer, where we know we can reach them later.
+
+    Let's jump up to the client-side now, where we can see how this token is used on the product page.
+
+.step(data-title='Rendering a Product Page: The Template', 
+  data-file='views/detail.jade')
+  :markdown
+    ## Rendering a Product Page: The Template
+
+    To render the product page, we will make use of two partial templates, `_ship_detail` and `_video`. The former will display information about the current ship. The latter will embed a video chat widget which will be used both on our customer's product detail page, and on the support agent's page (which we'll look at later).
+
+    Let's check out this partial template to see what it looks like.
+
+.step(data-title='Video Partial', 
+  data-file='views/_video.jade')
+  :markdown
+    ## Video Partial
+
+    This template creates the HTML `video` elements that our two conversation participants will be shown in. It also creates some simple UI that will allow us to mute and hang up our video call.
+
+.step(data-title='Inserting Capability Tokens and Customer\'s Unique ID', 
+  data-file='views/_video.jade', data-highlight='11-15')
+  :markdown
+    ## Inserting Capability Tokens and Customer's Unique ID
+
+    What might not be completely obvious, though, is what's happening here. With these statements, we're writing in values generated on the server (our capability token and unique ID for this customer) into JavaScript strings that will be evaluated once the page is loaded.
+
+    We'll go into how these values are used in depth soon, but let's finish out our look at the customer UI by showing how a support request gets created.
+
+.step(data-title='Creating a Ticket', 
+  data-file='public/js/product.js', data-highlight='14-33')
+  :markdown
+    ## Creating a Ticket
+
+    On our product detail page, we load up some JavaScript that will listen for a click event on the "Request Support" button. This will fire off an Ajax request to the server, which will create a new support ticket in our database.  That ticket will contain both the URL for the product our customer is viewing, as well as their unique ID which we assigned on the server. 
+
+    By capturing these values in a support ticket, our agents will be able to provide a better support experience when they finally reach out - they'll know what product the customer is looking at, and how to contact them via video chat.
+
+    Let's switch over to the agent side of things to see how the video support call actually gets created.
+
+    
+
