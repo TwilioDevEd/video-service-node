@@ -4,11 +4,11 @@ block content
   h1= ship.model
   p= 'This customer has been waiting for ' + timeAgo(ticket.createdAt) + '.'
   .row
-    .col-md-6
+    .col-sm-6
       p
         a(href='/tickets') &lt;&lt; Back to all tickets
       include _ship_detail
-    .col-md-6
+    .col-sm-6
       include _video
 
 block scripts
