@@ -4,12 +4,7 @@ $(function() {
 
     // Immediately initiate outbound call to the endpoint
     $(document).on('endpointCreated', function(e, endpoint) {
-        endpoint.createConversation(ticketEndpoint)
-            .done(showVideoStreams, function(error) {
-            // Failed to set up outbound call
-            console.log(error.stack);
-            alert('Sorry, could not create outbound call :(');
-        });
+        endpoint.createConversation(ticketEndpoint).then(showVideoStreams);
     });
 
     // On hangup, just hide video widget
