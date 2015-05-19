@@ -7,7 +7,7 @@
 
     ![//s3.amazonaws.com/howtodocs/video-service-customer-flow.png](//s3.amazonaws.com/howtodocs/video-service-customer-flow.png)
 
-    At a high level, our user must:
+    To request video support, our user must:
 
     1. Visit a product page
     2. Click a button to request live support
@@ -35,14 +35,14 @@
 
     This route will handle requests for all the individual product pages. There's a controller function `products.detail` which handles actually fetching product details from the Star Wars API, and including them on the rendered page.
 
-    However, we're more interested in the `token` [middleware function](http://expressjs.com/guide/using-middleware.html), which will generate a "capability token" that enables any viewer of the page to receive an incoming video call. Let's dive into that code now.
+    However, we're more interested in the `token` [middleware function](http://expressjs.com/guide/using-middleware.html), which will generate a one-time use access token that enables any viewer of the page to receive an incoming video call. Let's dive into that code now.
 
 .step(data-title='Rendering a Product Page: Token Middleware', 
-  data-file='middleware/token.js')
+  data-file='middleware/token.js', data-highlight='25-57')
   :markdown
     ## Rendering a Product Page: The Token Middleware
 
-    This middleware function will be executed before every product page is rendered. It will use Twilio's helper library for Node.js to generate a one-time use token that allows a connected browser to receive incoming calls. It also generates a unique ID for this client using the `uuid` module - we'll use this as the "phone number" for our customer, where we know we can reach them later.
+    This middleware function will be executed before every product page is rendered. It will use Twilio's helper library for Node.js to generate a one-time use token that authorizes a connected browser to receive incoming calls via Twilio. It also generates a unique ID for this client using the `uuid` module - we'll use this as the "phone number" for our customer, where we know we can reach them later. We store both of these values as local variables in the context of our HTTP response, so we can render them in our Jade templates.
 
     Let's jump up to the client-side now, where we can see how this token is used on the product page.
 
@@ -60,14 +60,14 @@
   :markdown
     ## Video Partial
 
-    This template creates the HTML `video` elements that our two conversation participants will be shown in. It also creates some simple UI that will allow us to mute and hang up our video call.
+    This template creates the HTML  elements that our two conversation participants will be shown in. We also include the Twilio Video SDK from a CDN, which will include all of the Twilio API in the window scope.
 
 .step(data-title='Inserting Capability Tokens and Customer\'s Unique ID', 
-  data-file='views/_video.jade', data-highlight='11-15')
+  data-file='views/_video.jade', data-highlight='8-14')
   :markdown
     ## Inserting Capability Tokens and Customer's Unique ID
 
-    What might not be completely obvious, though, is what's happening here. With these statements, we're writing in values generated on the server (our capability token and unique ID for this customer) into JavaScript strings that will be evaluated once the page is loaded.
+    Here, we insert two values generated on the server into `script` tags, which will allow our JavaScript code to access them. We need both the endpoint ID for this page (uniquely identifying the person visiting it), and the secure token we generated allowing the browser to use the Twilio back end.
 
     We'll go into how these values are used in depth soon, but let's finish out our look at the customer UI by showing how a support request gets created.
 

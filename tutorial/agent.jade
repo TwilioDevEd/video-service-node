@@ -22,43 +22,43 @@
 
     Most of the action for the call is happening on the client side, though, so let's dive into the browser code to see what's going on!
 
-.step(data-title='Initializing the Twilio JavaScript SDK', 
+.step(data-title='Shared Code for Customer and Agent', 
   data-file='public/js/video.js')
+  :markdown
+    ## Shared Code for Customer and Agent
+
+    The video partial, which is used for both the customer and the agent views, includes this JavaScript file. It adds shared logic that will be needed for both parts of the UI.  Let's check these pieces out first.
+
+.step(data-title='Initializing the Twilio JavaScript SDK', 
+  data-file='public/js/video.js', data-highlight='26-27')
   :markdown
     ## Initializing the Twilio JavaScript SDK
 
-    UNDER CONSTRUCTION
-
-.step(data-title='Making an Outbound Call', 
-  data-file='public/js/ticket.js')
-  :markdown
-    ## Making an Outbound Call
-
-    UNDER CONSTRUCTION
+    For the agent (and for customers) the first order of business is to create an `Endpoint` to represent the current person viewing the page. We create one here, passing in the window-scoped access token (JWT string) we created on the server.
 
 .step(data-title='Accepting an Inbound Call', 
-  data-file='public/js/video.js')
+  data-file='public/js/video.js', data-highlight='29-33')
   :markdown
     ## Accepting an Inbound Call
 
-    UNDER CONSTRUCTION
+    Immediately after creating the Endpoint, we regiser a listener that will be fired on any incoming vieo call invitations. For this example, we automatically accept the invite.
 
 .step(data-title='Displaying Video Streams', 
-  data-file='public/js/video.js')
+  data-file='public/js/video.js', data-highlight='4-21')
   :markdown
     ## Displaying Video Streams
 
-    UNDER CONSTRUCTION
+    To display both parties in the video call, the logic is the same whether you initated the conversation, or you accepted an invitation. The Twilio JS SDK will append a video tag to an element of your choosing containing data from your own local web cam, and the stream coming from the person you are calling.
 
-.step(data-title='Controlling Your Local Stream', 
-  data-file='public/js/video.js')
+.step(data-title='Making an Outbound Call', 
+  data-file='public/js/ticket.js', data-highlight='5-8')
   :markdown
-    ## Controlling Your Local Stream
+    ## Making an Outbound Call
 
-    UNDER CONSTRUCTION
+    In the support agent UI, we immediately attempt to place an outbound call to the endpoint ID associated with the ticket. We inserted `ticketEndpoint` into the template when the agent page was displayed, much like we did with our access token.
 
 .step(data-title='All Done!', 
-  data-file='public/js/video.js')
+  data-file='public/js/ticket.js')
   :markdown
     ## All Done!
 
