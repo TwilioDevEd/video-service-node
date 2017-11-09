@@ -2,10 +2,6 @@
 
 This is an example application demonstrating a customer service use case with Node.js and the [Express](http://www.expressjs.com) web framework.  In addition to Express, this project contains other third-party modules that may be useful in creating applications with Twilio.
 
-## Deploy On Heroku
-
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/TwilioDevEd/video-service-node)
-
 ## Running the Project on Your Machine
 
 To run this project on your computer, download or clone the source. You will also need to download and install either [Node.js](http://nodejs.org/) or [io.js](https://iojs.org/en/index.html), both of which should also install [npm](https://www.npmjs.com/). You will also need to [sign up for a Twilio account](https://www.twilio.com/try-twilio) if you don't have one already.
