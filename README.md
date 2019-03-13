@@ -1,3 +1,6 @@
+## Deprecation notice
+This project uses Twilio's the deprecated Conversations SDK. Please check out our current Getting Started guide for Video and accompanying repository instead.
+
 # Customer Service with Twilio Video
 
 This is an example application demonstrating a customer service use case with Node.js and the [Express](http://www.expressjs.com) web framework.  In addition to Express, this project contains other third-party modules that may be useful in creating applications with Twilio.
