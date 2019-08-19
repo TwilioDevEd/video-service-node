@@ -40,7 +40,7 @@
     "uuid": "^2.0.1"
   },
   "devDependencies": {
-    "chai": "^2.1.0",
+    "chai": "^4.2.0",
     "mocha": "^2.1.0"
   },
   "engines": {
