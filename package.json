@@ -37,7 +37,7 @@
     "request": "^2.55.0",
     "twilio": "^1.11.1",
     "underscore.string": "^3.0.3",
-    "uuid": "^2.0.1"
+    "uuid": "^7.0.3"
   },
   "devDependencies": {
     "chai": "^2.1.0",
